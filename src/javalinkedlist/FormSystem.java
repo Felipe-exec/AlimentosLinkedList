@@ -6,9 +6,10 @@ package javalinkedlist;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.awt.Toolkit;
 /**
  *
- * @author Felipe & MatheusFranco
+ * @author Felipe, Josue & MatheusFranco
  */
 public class FormSystem extends javax.swing.JFrame 
 {
@@ -21,6 +22,12 @@ public class FormSystem extends javax.swing.JFrame
     {
         initComponents();
         loadArc();
+        setIcon();
+    }
+    
+    private void setIcon()
+    {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icone.png")));
     }
 
     private void loadArc()
@@ -93,6 +100,7 @@ public class FormSystem extends javax.swing.JFrame
         lblProx = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImages(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(102, 153, 0));
@@ -142,7 +150,6 @@ public class FormSystem extends javax.swing.JFrame
 
         btnAdd.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         btnAdd.setText("Adicionar Alimento");
-        btnAdd.setActionCommand("Adicionar Alimento");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -221,6 +228,7 @@ public class FormSystem extends javax.swing.JFrame
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 830, 630));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -231,14 +239,14 @@ public class FormSystem extends javax.swing.JFrame
         {
             if(a.getName().contains(txtName.getText()))
             {
-                JOptionPane.showMessageDialog(null, "Encontrado posicao "+s);
+                JOptionPane.showMessageDialog(null, "Encontrado na posicao: "+s);
                 found = true;
             }
             s++;
         }
         if(!found)
         {
-            JOptionPane.showMessageDialog(null, "Não encontrado ");
+            JOptionPane.showMessageDialog(null, "Não encontrado...");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -248,11 +256,11 @@ public class FormSystem extends javax.swing.JFrame
         int p = list.indexOf(f);
         if(list.contains(f))
         {
-            JOptionPane.showMessageDialog(null, "Encontrado posicao "+p);
+            JOptionPane.showMessageDialog(null, "Encontrado na posição"+p);
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Não encontrado "+p);
+            JOptionPane.showMessageDialog(null, "Não encontrado...");
         }
     }//GEN-LAST:event_btnSearchContainsActionPerformed
 
