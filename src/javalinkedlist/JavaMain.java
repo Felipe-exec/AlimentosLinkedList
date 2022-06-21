@@ -1,6 +1,4 @@
-
 package javalinkedlist;
-
 
 public class JavaMain {
 
@@ -11,5 +9,4 @@ public class JavaMain {
         FormSystem form = new FormSystem();
         form.setVisible(true);
     }
-    
 }

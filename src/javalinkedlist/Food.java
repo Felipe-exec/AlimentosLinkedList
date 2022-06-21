@@ -1,12 +1,12 @@
 package javalinkedlist;
 //import java.lang.Comparable;
 
-public class Food implements Comparable<Food>{
+public class Food implements Comparable<Food> {
+
     private String name;
-    private int fat;
-    private int energeticValue;
+    private float fat;
+    private float energeticValue;
     private int nutrition;
-    
 
     public String getName() {
         return name;
@@ -24,42 +24,44 @@ public class Food implements Comparable<Food>{
         this.nutrition = nutrition;
     }
 
-    public int getEnergeticValue() {
+    public float getEnergeticValue() {
         return energeticValue;
     }
 
-    public void setEnergeticValue(int energeticValue) {
+    public void setEnergeticValue(float energeticValue) {
         this.energeticValue = energeticValue;
     }
-    
-    public int getFat()
-    {
+
+    public float getFat() {
         return this.fat;
     }
-    
-    public void setFat(int fat)
-    {
+
+    public void setFat(float fat) {
         this.fat = fat;
     }
-    
-    
-    public int compareTo(Food Food2){
-      return this.getName().compareTo(Food2.getName());
+
+    @Override
+    public int compareTo(Food Food2) {
+        return this.getName().compareTo(Food2.getName());
     }
-    
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Food alimentos = (Food) o;
 
         return this.name != null ? (alimentos.name).equals(this.name) : alimentos.name == null;
     }
-    
-     @Override
-    public String toString(){
-        return getName() + ": " + getFat() + " - " + getNutrition() + " - " + getEnergeticValue() ;
+
+    @Override
+    public String toString() {
+        return getName() + ": " + getFat() + " - " + getNutrition() + " - " + getEnergeticValue();
     }// fim toString
-    
+
 }
