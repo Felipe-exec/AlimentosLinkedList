@@ -61,7 +61,7 @@ public class Food implements Comparable<Food> {
 
     @Override
     public String toString() {
-        return getName() + ": " + getFat() + " - " + getNutrition() + " - " + getEnergeticValue();
+        return getName() + ": " + getEnergeticValue() + " - " + getNutrition() + " - " + getFat();
     }// fim toString
 
 }
