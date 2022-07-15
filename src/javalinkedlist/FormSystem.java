@@ -3,71 +3,65 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package javalinkedlist;
+
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 import java.awt.Toolkit;
+
 /**
  *
  * @author Felipe, Josue & MatheusFranco
  */
-public class FormSystem extends javax.swing.JFrame 
-{
+public class FormSystem extends javax.swing.JFrame {
+
     LinkedList<Food> list = new LinkedList<>();
-    Comparator<Food> compareEnergeticValue = (Food f1, Food f2) -> f1.getEnergeticValue() - f2.getEnergeticValue();
+    Comparator<Food> compareEnergeticValue = (Food f1, Food f2) -> (int) (f1.getEnergeticValue() - f2.getEnergeticValue());
     Comparator<Food> compareNutrition = (Food f1, Food f2) -> f1.getNutrition() - f2.getNutrition();
-    Comparator<Food> compareFat = (Food f1, Food f2) -> f1.getFat() - f2.getFat();
-    
-    public FormSystem() 
-    {
+    Comparator<Food> compareFat = (Food f1, Food f2) -> (int) (f1.getFat() - f2.getFat());
+
+    public FormSystem() {
         initComponents();
         loadArc();
         setIcon();
     }
-    
-    private void setIcon()
-    {
+
+    private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icone.png")));
     }
 
-    private void loadArc()
-    {
-     String txtFile = "data.txt";
+    private void loadArc() {
+        String txtFile = "data.txt";
         String line = "";
         String[] read = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(txtFile))) {
+        try ( BufferedReader br = new BufferedReader(new FileReader(txtFile))) {
             while ((line = br.readLine()) != null) {
                 Food f = new Food();
                 read = line.split(",");
-                System.out.println("Name:"+read[0]+ " EnergV= " + read[1] + " , Nutrition=" + read[2] + "" + " , Fat=" + read[3]);
+                System.out.println("Name:" + read[0] + " EnergV= " + read[1] + " , Nutrition=" + read[2] + "" + " , Fat=" + read[3]);
                 f.setName(read[0]);
                 f.setEnergeticValue(Integer.parseInt(read[1]));
                 int nutrition = (Integer.parseInt(read[2]));
                 f.setNutrition(nutrition);
                 int fat = (Integer.parseInt(read[3]));
                 f.setFat(fat);
-                list.add(f); 
+                list.add(f);
             }// fim percurso no arquivo
             showList();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    void showList()
-    {
+
+    void showList() {
         listFood.setText("");
-        if(!list.isEmpty())
-        {
-            for(Food f:list)
-            {
-                listFood.append(f+"\n");
+        if (!list.isEmpty()) {
+            for (Food f : list) {
+                listFood.append(f + "\n");
             }
         }
-            
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     /**
@@ -231,21 +225,18 @@ public class FormSystem extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        int s=0;
+        int s = 0;
         boolean found = false;
-        for(Food a:list)
-        {
-            if(a.getName().contains(txtName.getText()))
-            {
-                JOptionPane.showMessageDialog(null, "Encontrado na posicao: "+s);
+        for (Food a : list) {
+            if (a.getName().contains(txtName.getText())) {
+                JOptionPane.showMessageDialog(null, "Encontrado na posicao: " + s);
                 found = true;
             }
             s++;
         }
-        if(!found)
-        {
+        if (!found) {
             JOptionPane.showMessageDialog(null, "Não encontrado...");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -254,12 +245,9 @@ public class FormSystem extends javax.swing.JFrame
         Food f = new Food();
         f.setName(txtName.getText());
         int p = list.indexOf(f);
-        if(list.contains(f))
-        {
-            JOptionPane.showMessageDialog(null, "Encontrado na posição"+p);
-        }
-        else
-        {
+        if (list.contains(f)) {
+            JOptionPane.showMessageDialog(null, "Encontrado na posição: " + p);
+        } else {
             JOptionPane.showMessageDialog(null, "Não encontrado...");
         }
     }//GEN-LAST:event_btnSearchContainsActionPerformed
@@ -267,36 +255,28 @@ public class FormSystem extends javax.swing.JFrame
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         Food f = new Food();
         f.setName(txtName.getText());
-        f.setEnergeticValue(Integer.parseInt(txtEnergeticValue.getText()));
+        f.setEnergeticValue(Float.parseFloat(txtEnergeticValue.getText()));
         f.setNutrition(Integer.parseInt(txtNutrition.getText()));
-        f.setFat(Integer.parseInt(txtFat.getText()));
-        if(txtPositionAdd.getText().equals(""))
-        {
+        f.setFat(Float.parseFloat(txtFat.getText()));
+        if (txtPositionAdd.getText().equals("")) {
             list.add(f);
-        }
-        else
-        {
-            list.add(Integer.parseInt(txtPositionAdd.getText()),f);
+        } else {
+            list.add(Integer.parseInt(txtPositionAdd.getText()), f);
         }
         showList();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResolverActionPerformed
         Food f;
-        if(!list.isEmpty())
-        {
-            if(txtPosicaoRemove.getText().equals(""))
-            {
+        if (!list.isEmpty()) {
+            if (txtPosicaoRemove.getText().equals("")) {
                 f = list.remove();
-            }
-            else
-            {
-                f = list.remove(Integer.parseInt(txtPosicaoRemove.getText()) );
+            } else {
+                f = list.remove(Integer.parseInt(txtPosicaoRemove.getText()));
             }
             lblProx.setText(f.getName());
             showList();
         }
-
     }//GEN-LAST:event_btnResolverActionPerformed
 
     private void btnOrdNutritionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdNutritionActionPerformed
